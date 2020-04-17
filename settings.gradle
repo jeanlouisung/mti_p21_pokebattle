@@ -1,0 +1,2 @@
+rootProject.name='mti_p21_pokebattle'
+include ':app'
