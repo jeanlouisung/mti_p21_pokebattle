@@ -9,19 +9,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mti_p21_pokebattle.R
 import com.example.mti_p21_pokebattle.models.PokemonDetail
 
 
-class PokedexAdapter(val data : List<PokemonDetail>, val context : Context?) : RecyclerView.Adapter<PokedexAdapter.ViewHolder>() {
+class PokedexAdapter(val data: List<PokemonDetail>, val context: Context?) :
+    RecyclerView.Adapter<PokedexAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val nameTextView : TextView = itemView.findViewById(R.id.list_item_pokedex_txt_name)
-        val imgView : ImageView = itemView.findViewById(R.id.list_item_pokedex_img)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val nameTextView: TextView = itemView.findViewById(R.id.list_item_pokedex_txt_name)
+        val imgView: ImageView = itemView.findViewById(R.id.list_item_pokedex_img)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val rowView : View = LayoutInflater.from(context).inflate(R.layout.list_item_pokedex, parent, false)
+        val rowView: View =
+            LayoutInflater.from(context).inflate(R.layout.list_item_pokedex, parent, false)
 
         return ViewHolder(
             rowView
@@ -36,9 +39,11 @@ class PokedexAdapter(val data : List<PokemonDetail>, val context : Context?) : R
         holder.nameTextView.text = data[position].name
         holder.imgView.setImageURI(null)
 
-        Log.d("Pokemon", data[position].sprite)
-        val uri: Uri = Uri.parse(data[position].sprite)
+        if (context != null) {
+            Glide.with(context)
+                .load(data[position].sprite)
+                .into(holder.imgView)
+        }
 //        holder.imgView.setImageURI(Uri.parse(data[position].sprite))
-//        holder.imgView.setImageResource(android.R.drawable.arrow_up_float)
     }
 }
