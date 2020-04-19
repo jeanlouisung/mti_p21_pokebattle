@@ -36,7 +36,7 @@ fun getType(type: String): Int {
         return R.drawable.feu
     if (type == "ice")
         return R.drawable.glace
-    if (type == "insect")
+    if (type == "insect" || type == "bug")
         return R.drawable.insecte
     if (type == "normal")
         return R.drawable.normal

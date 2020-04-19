@@ -9,10 +9,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mti_p21_pokebattle.R
 import com.example.mti_p21_pokebattle.getType
-import com.example.mti_p21_pokebattle.models.PokemonDetail
+import com.example.mti_p21_pokebattle.models.PokedexPokemonDetail
 
 
-class PokedexAdapter(val data: List<PokemonDetail>, val context: Context?) :
+class PokedexAdapter(
+    val data: List<PokedexPokemonDetail>,
+    val context: Context?,
+    val onItemClickListener: View.OnClickListener
+) :
     RecyclerView.Adapter<PokedexAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -24,7 +28,7 @@ class PokedexAdapter(val data: List<PokemonDetail>, val context: Context?) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val rowView: View =
             LayoutInflater.from(context).inflate(R.layout.list_item_pokedex, parent, false)
-
+        rowView.setOnClickListener(onItemClickListener)
         return ViewHolder(
             rowView
         )
@@ -42,5 +46,6 @@ class PokedexAdapter(val data: List<PokemonDetail>, val context: Context?) :
         } else {
             holder.typeImgView1.setImageResource(getType(data[position].types[0].name))
         }
+        holder.itemView.tag = data[position]
     }
 }
