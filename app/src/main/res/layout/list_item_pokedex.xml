@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="45dp">
 
     <TextView
         android:id="@+id/list_item_pokedex_txt_name"
@@ -30,9 +30,10 @@
         android:id="@+id/list_item_pokedex_type1_img"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/list_item_pokedex_type2_img"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.488"
         tools:srcCompat="@android:drawable/arrow_down_float" />
 </androidx.constraintlayout.widget.ConstraintLayout>

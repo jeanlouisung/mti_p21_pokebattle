@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.mti_p21_pokebattle.R
+import com.example.mti_p21_pokebattle.getType
 import com.example.mti_p21_pokebattle.models.PokemonDetail
 
 
@@ -35,14 +35,12 @@ class PokedexAdapter(val data: List<PokemonDetail>, val context: Context?) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.nameTextView.text = data[position].name
-        holder.typeImgView1.setImageResource(R.drawable.acier)
-        holder.typeImgView2.setImageResource(R.drawable.electrique)
-
-//        if (context != null) {
-//            Glide.with(context)
-//                .load(data[position].sprite)
-//                .into(holder.imgView)
-//        }
+        holder.nameTextView.text = data[position].name.capitalize()
+        if (data[position].types.size == 2) {
+            holder.typeImgView1.setImageResource(getType(data[position].types[0].name))
+            holder.typeImgView2.setImageResource(getType((data[position].types[1].name)))
+        } else {
+            holder.typeImgView1.setImageResource(getType(data[position].types[0].name))
+        }
     }
 }
