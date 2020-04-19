@@ -1,8 +1,6 @@
 package com.example.mti_p21_pokebattle.adapters
 
 import android.content.Context
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +17,8 @@ class PokedexAdapter(val data: List<PokemonDetail>, val context: Context?) :
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.list_item_pokedex_txt_name)
-        val imgView: ImageView = itemView.findViewById(R.id.list_item_pokedex_img)
+        val typeImgView1: ImageView = itemView.findViewById(R.id.list_item_pokedex_type1_img)
+        val typeImgView2: ImageView = itemView.findViewById(R.id.list_item_pokedex_type2_img)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,13 +36,13 @@ class PokedexAdapter(val data: List<PokemonDetail>, val context: Context?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.nameTextView.text = data[position].name
-        holder.imgView.setImageURI(null)
+        holder.typeImgView1.setImageResource(R.drawable.acier)
+        holder.typeImgView2.setImageResource(R.drawable.electrique)
 
-        if (context != null) {
-            Glide.with(context)
-                .load(data[position].sprite)
-                .into(holder.imgView)
-        }
-//        holder.imgView.setImageURI(Uri.parse(data[position].sprite))
+//        if (context != null) {
+//            Glide.with(context)
+//                .load(data[position].sprite)
+//                .into(holder.imgView)
+//        }
     }
 }
