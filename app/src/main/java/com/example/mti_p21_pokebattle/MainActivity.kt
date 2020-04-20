@@ -2,6 +2,7 @@ package com.example.mti_p21_pokebattle
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.mti_p21_pokebattle.fragments.Home
 import com.example.mti_p21_pokebattle.fragments.Pokedex
 
 class MainActivity : AppCompatActivity() {
@@ -12,9 +13,9 @@ class MainActivity : AppCompatActivity() {
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        val pokedexFragment = Pokedex()
+        val homeFragment = Home()
 
-        fragmentTransaction.replace(R.id.main_container, pokedexFragment)
+        fragmentTransaction.replace(R.id.main_container, homeFragment)
         fragmentTransaction.commit()
     }
 }
