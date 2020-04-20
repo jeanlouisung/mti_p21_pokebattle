@@ -68,7 +68,6 @@ class Pokedex : Fragment() {
             pokedexDetailFragment.arguments = dataBundle
 
             fragmentTransaction.replace(R.id.main_container, pokedexDetailFragment, "PokedexDetail")
-            Log.d("Fragment", fragmentManager!!.popBackStack().toString())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

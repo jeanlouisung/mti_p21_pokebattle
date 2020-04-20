@@ -42,7 +42,7 @@ class Home : Fragment() {
             val pokedexFragment = Pokedex()
 
             fragmentTransaction.replace(R.id.main_container, pokedexFragment, "Pokedex")
-            fragmentTransaction.addToBackStack("Pokedex")
+            fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
 

@@ -53,7 +53,7 @@ class PokedexDetail : Fragment() {
                 override fun onFailure(call: Call<PokemonDetail>, t: Throwable) {
                     // Code here what happens if calling the WebService fails
                     Log.w("Pokedex Detail", "WebService call failed")
-                    Log.w("Error", t);
+                    Log.w("Error", t)
                 }
 
                 override fun onResponse(
