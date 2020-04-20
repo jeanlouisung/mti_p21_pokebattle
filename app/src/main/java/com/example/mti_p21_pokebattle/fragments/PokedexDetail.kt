@@ -48,6 +48,10 @@ class PokedexDetail : Fragment() {
             PokeapiWebService::class.java
         )
 
+        //TypeHelp
+        var type1 : String? = null
+        var type2 : String? = null
+
         val wsCallback: Callback<PokemonDetail> =
             object : Callback<PokemonDetail> {
                 override fun onFailure(call: Call<PokemonDetail>, t: Throwable) {
@@ -75,6 +79,9 @@ class PokedexDetail : Fragment() {
                             if (responseData.types.size > 1) {
                                 responseData.types.forEach {
                                     if (it.slot == 1) {
+                                        //TypeHelp
+                                        type1 = it.type.name
+
                                         view.pokedex_detail_pokemon_type1_img.setImageResource(
                                             getType(
                                                 it.type.name
@@ -82,6 +89,9 @@ class PokedexDetail : Fragment() {
                                         )
                                     }
                                     if (it.slot == 2) {
+                                        //TypeHelp
+                                        type2 = it.type.name
+
                                         view.pokedex_detail_pokemon_type2_img.setImageResource(
                                             getType(
                                                 it.type.name
@@ -92,6 +102,8 @@ class PokedexDetail : Fragment() {
                             } else {
                                 view.pokedex_detail_pokemon_type1_img.setImageResource(getType(responseData.types[0].type.name))
                                 view.pokedex_detail_pokemon_type2_img.setImageResource(android.R.color.transparent)
+                                //TypeHelp
+                                type1 = responseData.types[0].type.name
                             }
 
 
@@ -125,6 +137,44 @@ class PokedexDetail : Fragment() {
                     }
                 }
             }
+
+        //TypeHelp
+        val onType1ButtonClickListener = View.OnClickListener {
+            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+            val dataBundle = Bundle()
+            dataBundle.putString("typeName", type1)
+
+            val typeHelp = TypeHelp()
+            typeHelp.arguments = dataBundle
+
+            fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        //TypeHelp
+        val onType2ButtonClickListener = View.OnClickListener {
+            if (type2 != null) {
+                val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+                val dataBundle = Bundle()
+                dataBundle.putString("typeName", type2)
+
+                val typeHelp = TypeHelp()
+                typeHelp.arguments = dataBundle
+
+                fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+            }
+        }
+
+        //TypeHelp
+        view.pokedex_detail_pokemon_type1_img.setOnClickListener(onType1ButtonClickListener)
+        //TypeHelp
+        view.pokedex_detail_pokemon_type2_img.setOnClickListener(onType2ButtonClickListener)
+
         service.getPokemonDetail(arguments!!.getInt("id")).enqueue(wsCallback)
     }
 }
