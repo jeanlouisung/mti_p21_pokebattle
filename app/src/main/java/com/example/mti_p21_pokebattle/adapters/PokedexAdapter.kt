@@ -42,7 +42,7 @@ class PokedexAdapter(
         holder.nameTextView.text = data[position].name.capitalize()
         if (data[position].types.size == 2) {
             holder.typeImgView1.setImageResource(getType(data[position].types[0].name))
-            holder.typeImgView2.setImageResource(getType((data[position].types[1].name)))
+            holder.typeImgView2.setImageResource(getType(data[position].types[1].name))
         } else {
             holder.typeImgView1.setImageResource(getType(data[position].types[0].name))
         }
