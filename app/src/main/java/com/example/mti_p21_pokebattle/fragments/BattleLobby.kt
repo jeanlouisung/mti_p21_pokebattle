@@ -18,6 +18,7 @@ import com.example.mti_p21_pokebattle.interfaces.PokeapiWebService
 import com.example.mti_p21_pokebattle.models.PokedexPokemonDetail
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_battle_lobby.*
+import kotlinx.android.synthetic.main.fragment_battle_lobby.view.*
 import kotlinx.android.synthetic.main.fragment_pokedex.*
 import kotlinx.android.synthetic.main.fragment_pokedex_detail.view.*
 import retrofit2.Call
@@ -43,6 +44,12 @@ class BattleLobby : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
     }
+
+    //TypeHelp
+    var RandomPokemonType1 : String? = null
+    var RandomPokemonType2 : String? = null
+    var CurrentPokemonType1 : String? = null
+    var CurrentPokemonType2 : String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
@@ -78,11 +85,18 @@ class BattleLobby : Fragment() {
                 selected_pokemon_type2.setImageResource(getType(clickedPokedexLine.types[1].name))
                 selected_pokemon_type1.setVisibility(View.VISIBLE)
                 selected_pokemon_type2.setVisibility(View.VISIBLE)
+
+                //TypeHelp
+                CurrentPokemonType1 = clickedPokedexLine.types[0].name
+                CurrentPokemonType2 = clickedPokedexLine.types[1].name
             }
             else if (clickedPokedexLine.types.size == 1) {
                 selected_pokemon_type1.setImageResource(getType(clickedPokedexLine.types[0].name))
                 selected_pokemon_type1.setVisibility(View.VISIBLE)
                 selected_pokemon_type2.setVisibility(View.INVISIBLE)
+
+                //TypeHelp
+                CurrentPokemonType1 = clickedPokedexLine.types[0].name
             }
         }
 
@@ -147,6 +161,77 @@ class BattleLobby : Fragment() {
                     }
                 }
             }
+
+        //TypeHelp
+        val onRandomType1ButtonClickListener = View.OnClickListener {
+            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+            val dataBundle = Bundle()
+            dataBundle.putString("typeName", RandomPokemonType1)
+
+            val typeHelp = TypeHelp()
+            typeHelp.arguments = dataBundle
+
+            fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        //TypeHelp
+        val onRandomType2ButtonClickListener = View.OnClickListener {
+            if (RandomPokemonType2 != null) {
+                val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+                val dataBundle = Bundle()
+                dataBundle.putString("typeName", RandomPokemonType2)
+
+                val typeHelp = TypeHelp()
+                typeHelp.arguments = dataBundle
+
+                fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+            }
+        }
+
+        //TypeHelp
+        val onCurrentType1ButtonClickListener = View.OnClickListener {
+            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+            val dataBundle = Bundle()
+            dataBundle.putString("typeName", CurrentPokemonType1)
+
+            val typeHelp = TypeHelp()
+            typeHelp.arguments = dataBundle
+
+            fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        //TypeHelp
+        val onCurrentType2ButtonClickListener = View.OnClickListener {
+            if (CurrentPokemonType2 != null) {
+                val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+                val dataBundle = Bundle()
+                dataBundle.putString("typeName", CurrentPokemonType2)
+
+                val typeHelp = TypeHelp()
+                typeHelp.arguments = dataBundle
+
+                fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+            }
+        }
+
+        //TypeHelp
+        view.first_oponnent_pokemon_type1.setOnClickListener(onRandomType1ButtonClickListener)
+        view.first_opponent_pokemon_type2.setOnClickListener(onRandomType2ButtonClickListener)
+        view.selected_pokemon_type1.setOnClickListener(onCurrentType1ButtonClickListener)
+        view.selected_pokemon_type2.setOnClickListener(onCurrentType2ButtonClickListener)
+
         service.listPokemons().enqueue(wsCallback);
 
     }
@@ -163,10 +248,17 @@ class BattleLobby : Fragment() {
         if (listPokemons[0].types.size == 1) {
             first_oponnent_pokemon_type1.setImageResource(getType(listPokemons[0].types[0].name))
             first_opponent_pokemon_type2.setVisibility(View.INVISIBLE)
+
+            //TypeHelp
+            RandomPokemonType1 = listPokemons[0].types[0].name
         }
         else {
             first_oponnent_pokemon_type1.setImageResource(getType(listPokemons[0].types[0].name))
             first_opponent_pokemon_type2.setImageResource(getType(listPokemons[0].types[1].name))
+
+            //TypeHelp
+            RandomPokemonType1 = listPokemons[0].types[0].name
+            RandomPokemonType2 = listPokemons[0].types[1].name
         }
         return listPokemons
     }
