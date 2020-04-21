@@ -35,6 +35,16 @@ class Home : Fragment() {
         view.home_description_text.text =
             "Welcome Trainer! You have a team of three pokemons and you will fight 3 wild pokemons in a row. But before the battle starts, you only know your first opponent. And remember, most Pokemons have strenghts and weaknesses.\nGood Luck!"
 
+        val onBattleButtonClickListener = View.OnClickListener {
+            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+            val battleLobbyFragment = BattleLobby()
+
+            fragmentTransaction.replace(R.id.main_container, battleLobbyFragment, "BattleLobby")
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
         val onPokedexButtonClickListener = View.OnClickListener {
             //            val position = it.tag as Int
             val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
@@ -47,5 +57,6 @@ class Home : Fragment() {
         }
 
         view.home_pokedex_button.setOnClickListener(onPokedexButtonClickListener)
+        view.home_battle_button.setOnClickListener(onBattleButtonClickListener)
     }
 }
