@@ -93,7 +93,7 @@
         android:id="@+id/second_select_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="36dp"
         android:text="2"
         app:layout_constraintStart_toEndOf="@+id/first_select_button"
@@ -155,31 +155,74 @@
         android:id="@+id/first_select_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="48dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="cursive"
         android:text="?"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_select_image"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/second_select_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:fontFamily="cursive"
         android:text="?"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/second_select_name2"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toEndOf="@+id/first_select_name" />
+        app:layout_constraintEnd_toStartOf="@+id/third_select_name"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toEndOf="@+id/first_select_name"
+        app:layout_constraintTop_toBottomOf="@+id/second_select_image"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/second_select_name2"
+        android:id="@+id/third_select_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="68dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="cursive"
         android:text="?"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/third_select_image"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/first_select_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_select_button" />
+
+    <ImageView
+        android:id="@+id/second_select_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toStartOf="@+id/third_select_image"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toEndOf="@+id/first_select_image"
+        app:layout_constraintTop_toBottomOf="@+id/second_select_button" />
+
+    <ImageView
+        android:id="@+id/third_select_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/third_select_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

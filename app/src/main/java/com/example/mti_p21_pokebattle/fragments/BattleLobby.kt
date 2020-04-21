@@ -48,8 +48,10 @@ class BattleLobby : Fragment() {
 //        super.onViewCreated(view, savedInstanceState)
 
         val data: MutableList<PokedexPokemonDetail> = arrayListOf()
+        val myPokemonTeamsId: Array<Number> = Array(3) { i -> 0 }
 
         val baseUrl = "https://www.surleweb.xyz/api/"
+        var clickedPokedexLine: PokedexPokemonDetail = PokedexPokemonDetail(1, "", "", arrayListOf())
 
         val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
 
@@ -68,7 +70,7 @@ class BattleLobby : Fragment() {
         selected_pokemon_name.setVisibility(View.INVISIBLE)
 
         val onPokedexLineClickListener = View.OnClickListener {
-            val clickedPokedexLine = it.tag as PokedexPokemonDetail
+            clickedPokedexLine = it.tag as PokedexPokemonDetail
             selected_pokemon_name.text = clickedPokedexLine.name
             selected_pokemon_name.setVisibility(View.VISIBLE)
             if (clickedPokedexLine.types.size > 1) {
@@ -82,6 +84,37 @@ class BattleLobby : Fragment() {
                 selected_pokemon_type1.setVisibility(View.VISIBLE)
                 selected_pokemon_type2.setVisibility(View.INVISIBLE)
             }
+        }
+
+        first_select_button.setOnClickListener {
+            if (selected_pokemon_name.text != "TextView") {
+                first_select_name.text = clickedPokedexLine.name
+                Glide.with(context!!).load(clickedPokedexLine.sprite)
+                    .into(first_select_image)
+                myPokemonTeamsId[0] = clickedPokedexLine.id
+            }
+            showFightButton(myPokemonTeamsId)
+        }
+
+        second_select_button.setOnClickListener {
+            if (selected_pokemon_name.text != "TextView") {
+                second_select_name.text = clickedPokedexLine.name
+                Glide.with(context!!).load(clickedPokedexLine.sprite)
+                    .into(second_select_image)
+                myPokemonTeamsId[1] = clickedPokedexLine.id
+            }
+            showFightButton(myPokemonTeamsId)
+
+        }
+
+        third_select_button.setOnClickListener {
+            if (selected_pokemon_name.text != "TextView") {
+                third_select_name.text = clickedPokedexLine.name
+                Glide.with(context!!).load(clickedPokedexLine.sprite)
+                    .into(third_select_image)
+                myPokemonTeamsId[2] = clickedPokedexLine.id
+            }
+            showFightButton(myPokemonTeamsId)
         }
 
         val wsCallback: Callback<List<PokedexPokemonDetail>> =
@@ -136,6 +169,12 @@ class BattleLobby : Fragment() {
             first_opponent_pokemon_type2.setImageResource(getType(listPokemons[0].types[1].name))
         }
         return listPokemons
+    }
+
+    fun showFightButton(array: Array<Number>) {
+        if (array[0] != 0 && array[1] != 0 && array[2] != 0) {
+            fight_button.setVisibility(View.VISIBLE)
+        }
     }
 
 }
