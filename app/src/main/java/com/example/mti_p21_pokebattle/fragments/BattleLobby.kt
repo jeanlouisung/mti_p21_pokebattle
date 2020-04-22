@@ -46,15 +46,18 @@ class BattleLobby : Fragment() {
     }
 
     //TypeHelp
-    var RandomPokemonType1 : String? = null
-    var RandomPokemonType2 : String? = null
-    var CurrentPokemonType1 : String? = null
-    var CurrentPokemonType2 : String? = null
+    private var RandomPokemonType1 : String? = null
+    private var RandomPokemonType2 : String? = null
+    private var CurrentPokemonType1 : String? = null
+    private var CurrentPokemonType2 : String? = null
+
+    //BattleScreen
+    private val myPokemonTeamsId : Array<Int> = Array(3) { _ -> 0 }
+    private val opponentPokemons: MutableList<PokedexPokemonDetail> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
         val data: MutableList<PokedexPokemonDetail> = arrayListOf()
-        val myPokemonTeamsId: Array<Number> = Array(3) { i -> 0 }
 
         val baseUrl = "https://www.surleweb.xyz/api/"
         var clickedPokedexLine: PokedexPokemonDetail = PokedexPokemonDetail(1, "", "", arrayListOf())
@@ -155,7 +158,7 @@ class BattleLobby : Fragment() {
                                 PokedexAdapter(
                                     data, context, onPokedexLineClickListener
                                 )
-                            val OpponentPokemons = getRandomPokemon(data)
+                            getRandomPokemon(data)
                         }
                     }
                 }
@@ -225,44 +228,63 @@ class BattleLobby : Fragment() {
             }
         }
 
+        //BattleScreen
+        val onFightButtonClickListener = View.OnClickListener {
+            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+
+            val dataBundle = Bundle()
+            dataBundle.putInt("enemy1", opponentPokemons[0].id)
+            dataBundle.putInt("enemy2", opponentPokemons[1].id)
+            dataBundle.putInt("enemy3", opponentPokemons[2].id)
+            dataBundle.putInt("ally1", myPokemonTeamsId[0])
+            dataBundle.putInt("ally2", myPokemonTeamsId[1])
+            dataBundle.putInt("ally3", myPokemonTeamsId[2])
+
+            val battleScreen = BattleScreen()
+            battleScreen.arguments = dataBundle
+
+            fragmentTransaction.replace(R.id.main_container, battleScreen, "BattleScreen")
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
         //TypeHelp
         view.first_oponnent_pokemon_type1.setOnClickListener(onRandomType1ButtonClickListener)
         view.first_opponent_pokemon_type2.setOnClickListener(onRandomType2ButtonClickListener)
         view.selected_pokemon_type1.setOnClickListener(onCurrentType1ButtonClickListener)
         view.selected_pokemon_type2.setOnClickListener(onCurrentType2ButtonClickListener)
 
+        view.fight_button.setOnClickListener(onFightButtonClickListener)
         service.listPokemons().enqueue(wsCallback);
 
     }
 
-    fun getRandomPokemon(data: MutableList<PokedexPokemonDetail>): MutableList<PokedexPokemonDetail> {
-        val listPokemons: MutableList<PokedexPokemonDetail> = arrayListOf()
+    fun getRandomPokemon(data: MutableList<PokedexPokemonDetail>) {
         val randomValues = List(3) { Random.nextInt(0, data.size) }
         for (value in randomValues) {
-            listPokemons.add(data[value])
+            opponentPokemons.add(data[value])
         }
-        Glide.with(context!!).load(listPokemons[0].sprite)
+        Glide.with(context!!).load(opponentPokemons[0].sprite)
             .into(first_opponent_pokemon_image)
-        first_opponent_pokemon_name.text = listPokemons[0].name
-        if (listPokemons[0].types.size == 1) {
-            first_oponnent_pokemon_type1.setImageResource(getType(listPokemons[0].types[0].name))
+        first_opponent_pokemon_name.text = opponentPokemons[0].name
+        if (opponentPokemons[0].types.size == 1) {
+            first_oponnent_pokemon_type1.setImageResource(getType(opponentPokemons[0].types[0].name))
             first_opponent_pokemon_type2.setVisibility(View.INVISIBLE)
 
             //TypeHelp
-            RandomPokemonType1 = listPokemons[0].types[0].name
+            RandomPokemonType1 = opponentPokemons[0].types[0].name
         }
         else {
-            first_oponnent_pokemon_type1.setImageResource(getType(listPokemons[0].types[0].name))
-            first_opponent_pokemon_type2.setImageResource(getType(listPokemons[0].types[1].name))
+            first_oponnent_pokemon_type1.setImageResource(getType(opponentPokemons[0].types[0].name))
+            first_opponent_pokemon_type2.setImageResource(getType(opponentPokemons[0].types[1].name))
 
             //TypeHelp
-            RandomPokemonType1 = listPokemons[0].types[0].name
-            RandomPokemonType2 = listPokemons[0].types[1].name
+            RandomPokemonType1 = opponentPokemons[0].types[0].name
+            RandomPokemonType2 = opponentPokemons[0].types[1].name
         }
-        return listPokemons
     }
 
-    fun showFightButton(array: Array<Number>) {
+    fun showFightButton(array: Array<Int>) {
         if (array[0] != 0 && array[1] != 0 && array[2] != 0) {
             fight_button.setVisibility(View.VISIBLE)
         }

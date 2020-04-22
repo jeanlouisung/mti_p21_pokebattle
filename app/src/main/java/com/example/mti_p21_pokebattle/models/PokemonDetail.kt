@@ -5,6 +5,7 @@ data class PokemonDetail(
     val name: String,
     val height: Int,
     val weight: Int,
+    val moves: List<PokemonMove>,
     val sprites: PokemonSprite,
     val stats: MutableList<PokemonStats>,
     val types: MutableList<PokemonTypes>

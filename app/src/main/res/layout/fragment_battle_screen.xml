@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.BattleLobby" >
+
+    <ImageView
+        android:id="@+id/enemyImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/acier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enemyHPText" />
+
+    <TextView
+        android:id="@+id/enemyHPText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="HP : "
+        app:layout_constraintStart_toStartOf="@+id/enemyImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/enemyHPValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="?"
+        app:layout_constraintBottom_toBottomOf="@+id/enemyHPText"
+        app:layout_constraintEnd_toEndOf="@+id/enemyImage"
+        app:layout_constraintStart_toEndOf="@+id/enemyHPText"
+        app:layout_constraintTop_toTopOf="@+id/enemyHPText" />
+
+    <TextView
+        android:id="@+id/enemyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="?"
+        app:layout_constraintEnd_toEndOf="@+id/enemyImage"
+        app:layout_constraintStart_toStartOf="@+id/enemyImage"
+        app:layout_constraintTop_toBottomOf="@+id/enemyImage" />
+
+    <TextView
+        android:id="@+id/enemiesLeftText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Enemies left : "
+        app:layout_constraintBottom_toBottomOf="@+id/enemyImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/enemyImage" />
+
+    <TextView
+        android:id="@+id/enemiesLeftValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="?"
+        app:layout_constraintBottom_toBottomOf="@+id/enemiesLeftText"
+        app:layout_constraintStart_toEndOf="@+id/enemiesLeftText"
+        app:layout_constraintTop_toTopOf="@+id/enemiesLeftText" />
+
+    <ImageView
+        android:id="@+id/currentImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/acier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentHPText" />
+
+    <TextView
+        android:id="@+id/currentHPText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="HP : "
+        app:layout_constraintStart_toStartOf="@+id/currentImage"
+        app:layout_constraintTop_toBottomOf="@+id/enemyName" />
+
+    <TextView
+        android:id="@+id/currentHPValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="?"
+        app:layout_constraintBottom_toBottomOf="@+id/currentHPText"
+        app:layout_constraintEnd_toEndOf="@+id/currentImage"
+        app:layout_constraintStart_toEndOf="@+id/currentHPText"
+        app:layout_constraintTop_toTopOf="@+id/currentHPText" />
+
+    <TextView
+        android:id="@+id/currentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="?"
+        app:layout_constraintEnd_toEndOf="@+id/currentImage"
+        app:layout_constraintStart_toStartOf="@+id/currentImage"
+        app:layout_constraintTop_toBottomOf="@+id/currentImage" />
+
+    <ImageView
+        android:id="@+id/allyImage1"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/acier"
+        app:layout_constraintEnd_toStartOf="@+id/allyImage2"
+        app:layout_constraintTop_toBottomOf="@+id/history" />
+
+    <ImageView
+        android:id="@+id/allyImage2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/acier"
+        app:layout_constraintBottom_toBottomOf="@+id/allyImage1"
+        app:layout_constraintEnd_toStartOf="@+id/allyImage3" />
+
+    <ImageView
+        android:id="@+id/allyImage3"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/acier"
+        app:layout_constraintBottom_toBottomOf="@+id/allyImage2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/switchAlly1"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:fontFamily="sans-serif"
+        android:text="Switch"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/allyImage1"
+        app:layout_constraintEnd_toEndOf="@+id/allyImage1"
+        app:layout_constraintStart_toStartOf="@+id/allyImage1" />
+
+    <Button
+        android:id="@+id/switchAlly2"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:fontFamily="sans-serif"
+        android:text="Switch"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/allyImage2"
+        app:layout_constraintEnd_toEndOf="@+id/allyImage2"
+        app:layout_constraintStart_toEndOf="@+id/allyImage1" />
+
+    <Button
+        android:id="@+id/switchAlly3"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:fontFamily="sans-serif"
+        android:text="Switch"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/allyImage3"
+        app:layout_constraintEnd_toEndOf="@+id/allyImage3"
+        app:layout_constraintStart_toEndOf="@+id/allyImage2" />
+
+    <TextView
+        android:id="@+id/allyHPText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="HP : "
+        app:layout_constraintStart_toStartOf="@+id/allyImage1"
+        app:layout_constraintTop_toBottomOf="@+id/allyImage1" />
+
+    <TextView
+        android:id="@+id/allyHPText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="HP : "
+        app:layout_constraintStart_toStartOf="@+id/allyImage2"
+        app:layout_constraintTop_toBottomOf="@+id/allyImage2" />
+
+    <TextView
+        android:id="@+id/allyHPText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="HP : "
+        app:layout_constraintStart_toStartOf="@+id/allyImage3"
+        app:layout_constraintTop_toBottomOf="@+id/allyImage3" />
+
+    <TextView
+        android:id="@+id/allyHPValue1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="?"
+        app:layout_constraintBottom_toBottomOf="@+id/allyHPText1"
+        app:layout_constraintEnd_toEndOf="@+id/allyImage1"
+        app:layout_constraintStart_toEndOf="@+id/allyHPText1"
+        app:layout_constraintTop_toTopOf="@+id/allyHPText1" />
+
+    <TextView
+        android:id="@+id/allyHPValue2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="?"
+        app:layout_constraintBottom_toBottomOf="@+id/allyHPText2"
+        app:layout_constraintEnd_toEndOf="@+id/allyImage2"
+        app:layout_constraintStart_toEndOf="@+id/allyHPText2"
+        app:layout_constraintTop_toTopOf="@+id/allyHPText2" />
+
+    <TextView
+        android:id="@+id/allyHPValue3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="?"
+        app:layout_constraintBottom_toBottomOf="@+id/allyHPText3"
+        app:layout_constraintEnd_toEndOf="@+id/allyImage3"
+        app:layout_constraintStart_toEndOf="@+id/allyHPText3"
+        app:layout_constraintTop_toTopOf="@+id/allyHPText3" />
+
+    <ImageView
+        android:id="@+id/enemyType1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/acier"
+        app:layout_constraintEnd_toStartOf="@+id/enemyImage"
+        app:layout_constraintTop_toTopOf="@+id/enemyImage" />
+
+    <ImageView
+        android:id="@+id/enemyType2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/acier"
+        app:layout_constraintBottom_toBottomOf="@+id/enemyImage"
+        app:layout_constraintEnd_toStartOf="@+id/enemyImage" />
+
+    <ImageView
+        android:id="@+id/currentType1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/acier"
+        app:layout_constraintStart_toEndOf="@+id/currentImage"
+        app:layout_constraintTop_toTopOf="@+id/currentImage" />
+
+    <ImageView
+        android:id="@+id/currentType2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/acier"
+        app:layout_constraintBottom_toBottomOf="@+id/currentImage"
+        app:layout_constraintStart_toEndOf="@+id/currentImage" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
+
+    <TextView
+        android:id="@+id/history"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/currentImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/currentType1"
+        app:layout_constraintTop_toTopOf="@+id/currentImage" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <TableRow
+        android:id="@+id/horizontalLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="32dp"
+        android:background="#3C3F41"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allyHPText1" />
+
+    <TableRow
+        android:id="@+id/verticalLine1"
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        android:background="#3C3F41"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
+        app:layout_constraintEnd_toStartOf="@+id/guideline" />
+
+    <TableRow
+        android:id="@+id/verticalLine2"
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        android:background="#3C3F41"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5">
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/verticalLine3"
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        android:background="#3C3F41"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/moveTypeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
+        app:layout_constraintEnd_toStartOf="@+id/verticalLine1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/moveNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Move Name"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
+        app:layout_constraintEnd_toStartOf="@+id/verticalLine2"
+        app:layout_constraintStart_toEndOf="@+id/verticalLine1" />
+
+    <TextView
+        android:id="@+id/movePowerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Power"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
+        app:layout_constraintEnd_toStartOf="@+id/verticalLine3"
+        app:layout_constraintStart_toEndOf="@+id/verticalLine2" />
+
+    <TextView
+        android:id="@+id/moveAccuracyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accuracy (%)"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/verticalLine3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
