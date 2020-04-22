@@ -45,6 +45,7 @@ class PokedexAdapter(
             holder.typeImgView2.setImageResource(getType(data[position].types[1].name))
         } else {
             holder.typeImgView1.setImageResource(getType(data[position].types[0].name))
+            holder.typeImgView2.setImageResource(android.R.color.transparent)
         }
         holder.itemView.tag = data[position]
     }

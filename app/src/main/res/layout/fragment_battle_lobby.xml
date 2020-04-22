@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.BattleLobby" >
@@ -72,7 +72,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pokemon_list"
         android:layout_width="411dp"
-        android:layout_height="186dp"
+        android:layout_height="125dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -155,7 +155,7 @@
         android:id="@+id/first_select_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="56dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="cursive"
         android:text="?"
@@ -163,7 +163,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/first_select_image"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.289" />
 
     <TextView
         android:id="@+id/second_select_name"
@@ -174,17 +174,15 @@
         android:text="?"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/third_select_name"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toEndOf="@+id/first_select_name"
         app:layout_constraintTop_toBottomOf="@+id/second_select_image"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.27"
+        tools:layout_editor_absoluteX="201dp" />
 
     <TextView
         android:id="@+id/third_select_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
+        android:layout_marginEnd="60dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="cursive"
         android:text="?"
@@ -192,7 +190,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/third_select_image"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.27" />
 
     <ImageView
         android:id="@+id/first_select_image"
