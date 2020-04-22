@@ -53,7 +53,6 @@ class BattleLobby : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
-
         val data: MutableList<PokedexPokemonDetail> = arrayListOf()
         val myPokemonTeamsId: Array<Number> = Array(3) { i -> 0 }
 
@@ -172,7 +171,7 @@ class BattleLobby : Fragment() {
             val typeHelp = TypeHelp()
             typeHelp.arguments = dataBundle
 
-            fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+            fragmentTransaction.add(R.id.main_container, typeHelp, "TypeHelp")
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
@@ -188,7 +187,7 @@ class BattleLobby : Fragment() {
                 val typeHelp = TypeHelp()
                 typeHelp.arguments = dataBundle
 
-                fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+                fragmentTransaction.add(R.id.main_container, typeHelp, "TypeHelp")
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
             }
@@ -204,7 +203,7 @@ class BattleLobby : Fragment() {
             val typeHelp = TypeHelp()
             typeHelp.arguments = dataBundle
 
-            fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+            fragmentTransaction.add(R.id.main_container, typeHelp, "TypeHelp")
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
@@ -220,7 +219,7 @@ class BattleLobby : Fragment() {
                 val typeHelp = TypeHelp()
                 typeHelp.arguments = dataBundle
 
-                fragmentTransaction.replace(R.id.main_container, typeHelp, "TypeHelp")
+                fragmentTransaction.add(R.id.main_container, typeHelp, "TypeHelp")
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()
             }

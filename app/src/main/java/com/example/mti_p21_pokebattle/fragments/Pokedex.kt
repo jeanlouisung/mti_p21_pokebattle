@@ -67,7 +67,7 @@ class Pokedex : Fragment() {
             val pokedexDetailFragment = PokedexDetail()
             pokedexDetailFragment.arguments = dataBundle
 
-            fragmentTransaction.replace(R.id.main_container, pokedexDetailFragment, "PokedexDetail")
+            fragmentTransaction.add(R.id.main_container, pokedexDetailFragment, "PokedexDetail")
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
