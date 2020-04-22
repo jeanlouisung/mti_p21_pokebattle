@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/first_opponent_pokemon_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/acier"
@@ -55,7 +55,8 @@
         android:layout_marginTop="8dp"
         android:fontFamily="cursive"
         android:text="TextView"
-        android:textSize="25sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/first_opponent_pokemon_image" />
 
@@ -81,10 +82,10 @@
 
     <ImageView
         android:id="@+id/selected_pokemon_type1"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/acier"
         app:layout_constraintStart_toEndOf="@+id/selected_pokemon_name"
         app:layout_constraintTop_toBottomOf="@+id/pokemon_list" />
@@ -93,21 +94,21 @@
         android:id="@+id/second_select_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="32dp"
         android:text="2"
         app:layout_constraintStart_toEndOf="@+id/first_select_button"
-        app:layout_constraintTop_toBottomOf="@+id/selected_pokemon_type1" />
+        app:layout_constraintTop_toBottomOf="@+id/selected_pokemon_name" />
 
     <TextView
         android:id="@+id/selected_pokemon_name"
-        android:layout_width="86dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="cursive"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif"
         android:text="TextView"
-        android:textSize="25sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokemon_list" />
 
@@ -115,28 +116,28 @@
         android:id="@+id/third_select_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="32dp"
         android:text="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selected_pokemon_type2" />
+        app:layout_constraintStart_toEndOf="@+id/second_select_button"
+        app:layout_constraintTop_toBottomOf="@+id/selected_pokemon_name" />
 
     <Button
         android:id="@+id/first_select_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
         android:text="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selected_pokemon_name" />
 
     <ImageView
         android:id="@+id/selected_pokemon_type2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/acier"
         app:layout_constraintStart_toEndOf="@+id/selected_pokemon_type1"
         app:layout_constraintTop_toBottomOf="@+id/pokemon_list" />
@@ -155,42 +156,38 @@
         android:id="@+id/first_select_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="cursive"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
         android:text="?"
+        android:textAllCaps="false"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/first_select_image"
-        app:layout_constraintVertical_bias="0.289" />
+        app:layout_constraintStart_toStartOf="@+id/first_select_image"
+        app:layout_constraintTop_toBottomOf="@+id/first_select_image" />
 
     <TextView
         android:id="@+id/second_select_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="cursive"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
         android:text="?"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/second_select_image"
-        app:layout_constraintVertical_bias="0.27"
-        tools:layout_editor_absoluteX="201dp" />
+        app:layout_constraintStart_toStartOf="@+id/second_select_image"
+        app:layout_constraintTop_toBottomOf="@+id/second_select_image" />
 
     <TextView
         android:id="@+id/third_select_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="cursive"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
         android:text="?"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/third_select_image"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintStart_toStartOf="@+id/third_select_image"
+        app:layout_constraintTop_toBottomOf="@+id/third_select_image" />
 
     <ImageView
         android:id="@+id/first_select_image"
