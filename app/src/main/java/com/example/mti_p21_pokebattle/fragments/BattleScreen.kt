@@ -45,17 +45,15 @@ class BattleScreen : Fragment() {
         super.onAttach(context)
     }
 
-    private val pokemonsDetail: MutableList<PokemonDetail> = arrayListOf()
-    private val pokemonsStats: MutableList<PokemonStatsSimplified> = arrayListOf()
+    private val pokemonsDetail: MutableList<PokemonDetail> = arrayListOf()            // [enemy1, enemy2, enemy3, ally1, ally2, ally3]
+    private val pokemonsStats: MutableList<PokemonStatsSimplified> = arrayListOf()   // [enemy1, enemy2, enemy3, ally1, ally2, ally3]
+    private var identifiedPokemon : Int = 0
     private var enemyLeft : Int = 3
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
-        val data: MutableList<PokedexPokemonDetail> = arrayListOf()
 
         val baseUrl = "https://pokeapi.co/api/v2/"
-        var clickedPokedexLine: PokedexPokemonDetail = PokedexPokemonDetail(1, "", "", arrayListOf())
-
         val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
 
         val retrofit = Retrofit.Builder()
@@ -84,34 +82,91 @@ class BattleScreen : Fragment() {
                         // We got our data !
                         val responseData = response.body()
                         if (responseData != null) {
-                            pokemonsDetail.add(responseData)
-                            var pokemonStats = PokemonStatsSimplified()
-                            responseData.stats.forEach {
-                                if (it.stat.name == "speed")
-                                    pokemonStats.speed = it.base_stat
-                                if (it.stat.name == "special-defense")
-                                    pokemonStats.sdefense = it.base_stat
-                                if (it.stat.name == "special-attack")
-                                    pokemonStats.sattack = it.base_stat
-                                if (it.stat.name == "defense")
-                                    pokemonStats.defense = it.base_stat
-                                if (it.stat.name == "attack")
-                                    pokemonStats.attack = it.base_stat
-                                if (it.stat.name == "hp")
-                                    pokemonStats.hp = it.base_stat
-                            }
-                            pokemonsStats.add(pokemonStats)
-                            loadScreen()
+                            addDataToPokemonsDetail(responseData);
                         }
                     }
                 }
             }
         service.getPokemonDetail(arguments!!.getInt("enemy1")).enqueue(wsCallback)
-     //   service.getPokemonDetail(arguments!!.getInt("enemy2")).enqueue(wsCallback)
-     //   service.getPokemonDetail(arguments!!.getInt("enemy3")).enqueue(wsCallback)
-     //   service.getPokemonDetail(arguments!!.getInt("ally1")).enqueue(wsCallback)
-     //   service.getPokemonDetail(arguments!!.getInt("ally2")).enqueue(wsCallback)
-     //   service.getPokemonDetail(arguments!!.getInt("ally3")).enqueue(wsCallback)
+        service.getPokemonDetail(arguments!!.getInt("enemy2")).enqueue(wsCallback)
+        service.getPokemonDetail(arguments!!.getInt("enemy3")).enqueue(wsCallback)
+        service.getPokemonDetail(arguments!!.getInt("ally1")).enqueue(wsCallback)
+        service.getPokemonDetail(arguments!!.getInt("ally2")).enqueue(wsCallback)
+        service.getPokemonDetail(arguments!!.getInt("ally3")).enqueue(wsCallback)
+    }
+
+    private fun generatePokemonStats() {
+        pokemonsDetail.forEach {
+            var pokemonStats = PokemonStatsSimplified()
+            it.stats.forEach {
+                if (it.stat.name == "speed")
+                    pokemonStats.speed = it.base_stat
+                if (it.stat.name == "special-defense")
+                    pokemonStats.sdefense = it.base_stat
+                if (it.stat.name == "special-attack")
+                    pokemonStats.sattack = it.base_stat
+                if (it.stat.name == "defense")
+                    pokemonStats.defense = it.base_stat
+                if (it.stat.name == "attack")
+                    pokemonStats.attack = it.base_stat
+                if (it.stat.name == "hp")
+                    pokemonStats.hp = it.base_stat
+            }
+            pokemonsStats.add(pokemonStats);
+        }
+    }
+
+    private fun sortPokemonsDetail() {
+        for (index in 0..5) {
+            if (pokemonsDetail[index].id == arguments!!.getInt("enemy1")) {
+                val tmp = pokemonsDetail[0];
+                pokemonsDetail[0] = pokemonsDetail[index];
+                pokemonsDetail[index] = tmp;
+                break;
+            }
+        }
+        for (index in 1..5) {
+            if (pokemonsDetail[index].id == arguments!!.getInt("enemy2")) {
+                val tmp = pokemonsDetail[1];
+                pokemonsDetail[1] = pokemonsDetail[index];
+                pokemonsDetail[index] = tmp;
+                break;
+            }
+        }
+        for (index in 2..5) {
+            if (pokemonsDetail[index].id == arguments!!.getInt("enemy3")) {
+                val tmp = pokemonsDetail[2];
+                pokemonsDetail[2] = pokemonsDetail[index];
+                pokemonsDetail[index] = tmp;
+                break;
+            }
+        }
+        for (index in 3..5) {
+            if (pokemonsDetail[index].id == arguments!!.getInt("ally1")) {
+                val tmp = pokemonsDetail[3];
+                pokemonsDetail[3] = pokemonsDetail[index];
+                pokemonsDetail[index] = tmp;
+                break;
+            }
+        }
+        for (index in 4..5) {
+            if (pokemonsDetail[index].id == arguments!!.getInt("ally2")) {
+                val tmp = pokemonsDetail[4];
+                pokemonsDetail[4] = pokemonsDetail[index];
+                pokemonsDetail[index] = tmp;
+                break;
+            }
+        }
+    }
+
+    private fun addDataToPokemonsDetail(detail: PokemonDetail) {
+        pokemonsDetail.add(detail);
+        identifiedPokemon++;
+        if (identifiedPokemon == 6) {
+            sortPokemonsDetail();
+            generatePokemonStats();
+            loadScreen();
+        }
     }
 
     private fun newEnemy() {
