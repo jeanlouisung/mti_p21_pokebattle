@@ -1,5 +1,6 @@
 package com.example.mti_p21_pokebattle.interfaces
 
+import com.example.mti_p21_pokebattle.models.Move
 import com.example.mti_p21_pokebattle.models.PokedexPokemonDetail
 import com.example.mti_p21_pokebattle.models.PokemonDetail
 import com.example.mti_p21_pokebattle.models.Type
@@ -16,4 +17,7 @@ interface PokeapiWebService {
 
     @GET("type/{name}")
     fun getTypeDetail(@Path("name") name: String): Call<Type>
+
+    @GET("move/{name}")
+    fun getMoveDetail(@Path("name") name: String): Call<Move>
 }
