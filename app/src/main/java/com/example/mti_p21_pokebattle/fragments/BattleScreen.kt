@@ -49,10 +49,10 @@ class BattleScreen : Fragment() {
     private val pokemonsStats: MutableList<PokemonStatsSimplified> = arrayListOf()   // [enemy1, enemy2, enemy3, ally1, ally2, ally3]
     private val pokemonsMoves: MutableList<MutableList<Move>> = arrayListOf()         // [enemy1, enemy2, enemy3, ally1, ally2, ally3]
     private var currentPokemonMoves: MutableList<Move> = arrayListOf()
-    private var sizeOfPokemonMovesList : Int = 0
-    private var identifiedPokemon : Int = 0
-    private var currentEnemyIndex : Int = 0
-    private var currentAllyIndex : Int = 3
+    private var sizeOfPokemonMovesList : Int = 0                                // var used to know when we have gotten every moves
+    private var identifiedPokemon : Int = 0                                     // var used to know when we have gotten every pokemon details
+    private var currentEnemyIndex : Int = 0                                     // index of the current enemy in the Lists
+    private var currentAllyIndex : Int = 3                                       // index of the current ally in the Lists
 
     private val baseUrl = "https://pokeapi.co/api/v2/"
     private val jsonConverter = GsonConverterFactory.create(GsonBuilder().create())
@@ -150,6 +150,12 @@ class BattleScreen : Fragment() {
                     if (responseData != null) {
                         currentPokemonMoves.add(responseData)
                         if (currentPokemonMoves.size == sizeOfPokemonMovesList) {
+                            var filteredPokemonMove: MutableList<Move> = arrayListOf()
+                            currentPokemonMoves.forEach{
+                                if (it.power > 0 && it.accuracy > 0)
+                                    filteredPokemonMove.add(it)
+                            }
+                            currentPokemonMoves = filteredPokemonMove.sortedByDescending { it.power }.toMutableList()
                             pokemonsMoves[currentAllyIndex] = currentPokemonMoves
                             (movesList.adapter as MoveAdapter).setMoves(currentPokemonMoves)
                         }
@@ -158,6 +164,7 @@ class BattleScreen : Fragment() {
             }
         }
 
+    // fill the pokemonsStats List
     private fun generatePokemonStats() {
         pokemonsDetail.forEach {
             var pokemonStats = PokemonStatsSimplified()
@@ -179,6 +186,7 @@ class BattleScreen : Fragment() {
         }
     }
 
+    // Sort the pokemonsDetail List
     private fun sortPokemonsDetail() {
         for (index in 0..5) {
             if (pokemonsDetail[index].id == arguments!!.getInt("enemy1")) {
@@ -222,6 +230,7 @@ class BattleScreen : Fragment() {
         }
     }
 
+    // add a pokemon detail to the pokemonsDetail List and sort it when we get all 6 pokemons detail
     private fun addDataToPokemonsDetail(detail: PokemonDetail) {
         pokemonsDetail.add(detail)
         identifiedPokemon++
@@ -232,23 +241,36 @@ class BattleScreen : Fragment() {
         }
     }
 
+    // update a HP text view
+    // stats: the stats of the pokemon associated to the HPTextView
+    // HPTextView: the TextView of the HP associated to the pokemon
     private fun updateHP(stats: PokemonStatsSimplified, HPTextView: TextView) {
         HPTextView.text = stats.hp.toString()
     }
 
+    // update a sprite image view
+    // detail: the detail of the pokemon associated to the spriteImageView
+    // spriteImageView: the ImageView of the sprite associated to the pokemon
     private fun loadSprite(detail: PokemonDetail, spriteImageView: ImageView) {
         Glide.with(context!!).load(detail.sprites.front_default).into(spriteImageView)
     }
 
+    //TODO
+    // clickListener of an attack (called when the user click on an attack)
+    // it will be used in the MoveAdapter, you may need to make some functions public
     val onMoveLineClickListener = View.OnClickListener {
         val clickedPokedexLine = it.tag as Move
     }
 
+    //TODO
+    //
+    fun calculateDamage() {}
+
+    // load the moves of the current ally pokemon
     private fun loadCurrentPokemonMoves() {
         currentPokemonMoves = pokemonsMoves[currentAllyIndex]
-        if (currentPokemonMoves.size > 0) {
-            (movesList.adapter as MoveAdapter).setMoves(currentPokemonMoves)
-        } else {
+        (movesList.adapter as MoveAdapter).setMoves(currentPokemonMoves)
+        if (currentPokemonMoves.size < 1) {
             val movesDetail = pokemonsDetail[currentAllyIndex].moves
             sizeOfPokemonMovesList = movesDetail.size
             movesDetail.forEach {
@@ -258,6 +280,7 @@ class BattleScreen : Fragment() {
         }
     }
 
+    // load the sprite, the HP value and the moves of the current pokemon
     private fun loadCurrentPokemon() {
         loadSprite(pokemonsDetail[currentAllyIndex], view!!.currentImage)
         updateHP(pokemonsStats[currentAllyIndex], view!!.currentHPValue)
@@ -272,16 +295,18 @@ class BattleScreen : Fragment() {
         loadCurrentPokemonMoves()
     }
 
+    // load the sprite and HP of the 3 allies then load the current pokemon
     private fun loadAlliesSprites() {
         loadSprite(pokemonsDetail[3], view!!.allyImage1)
-        updateHP(pokemonsStats[3], view!!.allyHPValue1)
         loadSprite(pokemonsDetail[4], view!!.allyImage2)
-        updateHP(pokemonsStats[4], view!!.allyHPValue2)
         loadSprite(pokemonsDetail[5], view!!.allyImage3)
+        updateHP(pokemonsStats[3], view!!.allyHPValue1)
+        updateHP(pokemonsStats[4], view!!.allyHPValue2)
         updateHP(pokemonsStats[5], view!!.allyHPValue3)
         loadCurrentPokemon()
     }
 
+    // update the switch buttons, hide the button of the current pokemon and of the pokemons with 0HP left
     private fun updateSwitchButtons() {
         if (currentAllyIndex == 3 || pokemonsStats[3].hp == 0)
             view!!.switchAlly1.setVisibility(View.GONE)
@@ -297,6 +322,7 @@ class BattleScreen : Fragment() {
             view!!.switchAlly3.setVisibility(View.VISIBLE)
     }
 
+    // update the current enemy (include sprite, HP and types
     private fun newEnemy() {
         loadSprite(pokemonsDetail[currentEnemyIndex], view!!.enemyImage)
         updateHP(pokemonsStats[currentEnemyIndex], view!!.enemyHPValue)
@@ -310,6 +336,7 @@ class BattleScreen : Fragment() {
             view!!.enemyType2.setImageResource(getType(pokemonsDetail[currentEnemyIndex].types[1].type.name))
     }
 
+    // load screen (include enemy left value, the current enemy, allies and switch buttons)
     fun loadScreen() {
         view!!.enemiesLeftValue.text = (3 - currentEnemyIndex).toString()
         newEnemy()
